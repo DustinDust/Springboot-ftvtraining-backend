@@ -8,10 +8,10 @@ import lombok.Data;
 @Data
 public class RecordsRequestPayload {
   @Nullable
-  private String tenNguoiTaoQueryString;
+  private String nguoiTao;
 
   @Nullable
-  private String maHopDongQueryString;
+  private String maHopDong;
 
   @Nullable
   private String ngayNghiemThuUpperBound;
@@ -20,8 +20,8 @@ public class RecordsRequestPayload {
   private String ngayNghiemThuLowerBound;
 
   @NonNull
-  private int currentPage;
+  private int pageIndex;
 
   @NonNull
-  private int perPage;
+  private int pageSize;
 }

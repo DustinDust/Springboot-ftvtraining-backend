@@ -29,14 +29,11 @@ public class PhuLucService {
   @Autowired
   PhuLucRepository pLucRepository;
 
-  public List<PhuLuc> getAllPL(RecordsRequestPayload payload, Pageable pageable) {
-    Optional<String> maHopDong = Optional.ofNullable(payload.getMaHopDongQueryString());
-    Optional<String> tenNguoiTao = Optional.ofNullable(payload.getTenNguoiTaoQueryString());
+  public Page<PhuLuc> getAllPL(RecordsRequestPayload payload, Pageable pageable) {
+    Optional<String> maHopDong = Optional.ofNullable(payload.getMaHopDong());
+    Optional<String> tenNguoiTao = Optional.ofNullable(payload.getNguoiTao());
     Optional<String> ngayNghiemThuUpperBound = Optional.ofNullable(payload.getNgayNghiemThuUpperBound());
     Optional<String> ngayNghiemThuLowerBound = Optional.ofNullable(payload.getNgayNghiemThuLowerBound());
-    // System.out.println(ngayNghiemThuUpperBound.get());
-    // System.out.println(ngayNghiemThuLowerBound.get());
-
     Page<PhuLuc> page = this.pLucRepository.findAll(new Specification<PhuLuc>() {
       @Override
       public Predicate toPredicate(Root<PhuLuc> root, CriteriaQuery<?> query,
@@ -72,7 +69,7 @@ public class PhuLucService {
         "Items per page: " + pageable.getPageSize() +
             "\nCurrent page: " + pageable.getPageNumber() +
             "\nTotal page: " + page.getTotalPages());
-    return page.getContent();
+    return page;
   }
 
   public PhuLuc getOnePL(Long id) throws NoSuchElementException {
@@ -92,12 +89,11 @@ public class PhuLucService {
     return this.pLucRepository.save(phuLuc);
   }
 
-  public PhuLuc updatePhuLuc(long id, PhuLuc phuLuc) {
-    Optional<PhuLuc> exisitingPL = this.pLucRepository.findById(id);
+  public PhuLuc updatePhuLuc(PhuLuc phuLuc) {
+    Optional<PhuLuc> exisitingPL = this.pLucRepository.findById(phuLuc.getId());
     if (!exisitingPL.isPresent()) {
       throw new NoSuchElementException("Record with id of " + phuLuc.getId() + " does not exist");
     } else {
-      phuLuc.setId(id);
       return this.pLucRepository.save(phuLuc);
     }
   }
