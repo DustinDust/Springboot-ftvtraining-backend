@@ -2,6 +2,7 @@ package com.ftvtraining.namdp.controllers;
 
 import java.util.NoSuchElementException;
 
+import com.ftvtraining.namdp.exceptions.DatabaseRuntimeQueryException;
 import com.ftvtraining.namdp.exceptions.RecordAlreadyExistException;
 import com.ftvtraining.namdp.payload.ResponsePayload;
 
@@ -17,6 +18,7 @@ public class PhuLucAdviceController {
   @ExceptionHandler(Exception.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   public ResponsePayload handleAllException(Exception exception, WebRequest wr) {
+    exception.printStackTrace();
     return new ResponsePayload(exception.getLocalizedMessage(), false, null);
   }
 
@@ -31,4 +33,11 @@ public class PhuLucAdviceController {
   public ResponsePayload handleAlreadyExistException(RecordAlreadyExistException e, WebRequest wr) {
     return new ResponsePayload(e.getMessage(), false, null);
   }
+
+  @ExceptionHandler(DatabaseRuntimeQueryException.class)
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  public ResponsePayload handleQueryException(DatabaseRuntimeQueryException e, WebRequest wr) {
+    return new ResponsePayload(e.getMessage() + " - " + e.getErrorCode(), false, null);
+  }
+
 }

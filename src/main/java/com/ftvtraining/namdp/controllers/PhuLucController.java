@@ -37,6 +37,13 @@ public class PhuLucController {
     return ResponseEntity.ok().body(new GetRecordsResponse(res.getTotalElements(), res.getContent()));
   }
 
+  @PostMapping("/native")
+  public ResponseEntity<GetRecordsResponse> getPhuLucNatvie(@RequestBody RecordsRequestPayload payload) {
+    GetRecordsResponse res = this.pLucService.getPLProc(payload);
+    return ResponseEntity.ok().body(res);
+
+  }
+
   @GetMapping("/{id}")
   public PhuLuc getPhuLuc(@PathVariable(name = "id") Long id) {
     return this.pLucService.getOnePL(id);
@@ -58,6 +65,6 @@ public class PhuLucController {
   @DeleteMapping("/{id}")
   public ResponseEntity<ResponsePayload> deletePhuluc(@PathVariable(name = "id") Long id) {
     this.pLucService.deletePhuLuc(id);
-    return ResponseEntity.ok().body(new ResponsePayload("Successfully created", true, null));
+    return ResponseEntity.ok().body(new ResponsePayload("Successfully deleted", true, null));
   }
 }

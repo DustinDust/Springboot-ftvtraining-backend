@@ -5,6 +5,7 @@ import com.ftvtraining.namdp.repositories.PhuLucRepository;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -13,21 +14,35 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ftvtraining.namdp.exceptions.DatabaseRuntimeQueryException;
 import com.ftvtraining.namdp.exceptions.RecordAlreadyExistException;
 import com.ftvtraining.namdp.models.PhuLuc;
 import com.ftvtraining.namdp.models.PhuLuc_;
+import com.ftvtraining.namdp.payload.GetRecordsResponse;
 import com.ftvtraining.namdp.payload.RecordsRequestPayload;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PhuLucService {
   @Autowired
   PhuLucRepository pLucRepository;
+
+  @Autowired
+  private JdbcTemplate jdbcTemplate;
+
+  @Autowired
+  private ObjectMapper mapper;
 
   public Page<PhuLuc> getAllPL(RecordsRequestPayload payload, Pageable pageable) {
     Optional<String> maHopDong = Optional.ofNullable(payload.getMaHopDong());
@@ -41,11 +56,11 @@ public class PhuLucService {
         List<Predicate> predicates = new ArrayList<>();
         if (maHopDong.isPresent()) {
           predicates.add(criteriaBuilder.like(root.get(PhuLuc_.MA_HOP_DONG),
-              maHopDong.get() + "%"));
+              "%" + maHopDong.get() + "%"));
         }
         if (tenNguoiTao.isPresent()) {
           predicates.add(criteriaBuilder.like(root.get(PhuLuc_.NGUOI_TAO),
-              tenNguoiTao.get() + "%"));
+              "%" + tenNguoiTao.get() + "%"));
         }
         if (ngayNghiemThuLowerBound.isPresent()) {
           Date lowerBound = Date.valueOf(ngayNghiemThuLowerBound.get());
@@ -70,6 +85,24 @@ public class PhuLucService {
             "\nCurrent page: " + pageable.getPageNumber() +
             "\nTotal page: " + page.getTotalPages());
     return page;
+  }
+
+  @SuppressWarnings("unchecked")
+  public GetRecordsResponse getPLProc(RecordsRequestPayload payload) {
+    try {
+      String data = mapper.writeValueAsString(payload);
+      SimpleJdbcCall actor = new SimpleJdbcCall(jdbcTemplate).withCatalogName("PCKG_DM_PHU_LUC_2")
+          .withProcedureName("get_phu_luc");
+      SqlParameterSource inParams = new MapSqlParameterSource().addValue("pi_data", data);
+      Map<String, Object> res = actor.execute(inParams);
+      if (!res.containsKey("PO_ERR_CODE") || !(res.get("PO_ERR_CODE").toString().equals("0"))) {
+        throw new DatabaseRuntimeQueryException((String) res.get("PO_MESSAGE"), res.get("PO_ERR_CODE").toString());
+      } else {
+        return new GetRecordsResponse(Long.valueOf(res.get("PO_LENGTH").toString()), (List<PhuLuc>) res.get("PO_DATA"));
+      }
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException("Error processing json");
+    }
   }
 
   public PhuLuc getOnePL(Long id) throws NoSuchElementException {
