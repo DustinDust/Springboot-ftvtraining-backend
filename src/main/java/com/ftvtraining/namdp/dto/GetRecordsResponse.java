@@ -1,4 +1,4 @@
-package com.ftvtraining.namdp.payload;
+package com.ftvtraining.namdp.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class GetRecordsResponse {
+  boolean success = true;
+
   long length;
 
   List<PhuLuc> phuLuc;

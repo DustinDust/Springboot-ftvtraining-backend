@@ -1,0 +1,205 @@
+{
+  "length": 20,
+  "phuLuc": [
+    {
+      "id": 22,
+      "maHopDong": "shshhsesssh",
+      "tenPhuLuc": "Sheesh",
+      "ngayKy": "2022-04-06T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-29T17:00:00.000+00:00",
+      "ngayTao": "2022-04-21T17:00:00.000+00:00",
+      "nguoiTao": "Mi'ma",
+      "maKenhTruyen": "PP-Hard"
+    },
+    {
+      "id": 17,
+      "maHopDong": "FTV2019",
+      "tenPhuLuc": "DD Demo",
+      "ngayKy": "2021-11-11T00:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-04T00:00:00.000+00:00",
+      "ngayTao": "2021-11-09T00:00:00.000+00:00",
+      "nguoiTao": "ADMIN",
+      "maKenhTruyen": "Kenh one"
+    },
+    {
+      "id": 25,
+      "maHopDong": "Kimi",
+      "tenPhuLuc": "Canceld",
+      "ngayKy": "2022-04-11T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-05-12T17:00:00.000+00:00",
+      "ngayTao": "2022-04-20T17:00:00.000+00:00",
+      "nguoiTao": "Kalid",
+      "maKenhTruyen": "No nawa"
+    },
+    {
+      "id": 1,
+      "maHopDong": "55",
+      "tenPhuLuc": "PL",
+      "ngayKy": "2022-03-31T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-20T17:00:00.000+00:00",
+      "ngayTao": "2022-04-11T17:00:00.000+00:00",
+      "nguoiTao": "USER",
+      "maKenhTruyen": "yhh"
+    },
+    {
+      "id": 2,
+      "maHopDong": "114",
+      "tenPhuLuc": "PLTT",
+      "ngayKy": "2022-04-13T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-13T17:00:00.000+00:00",
+      "ngayTao": "2022-04-20T17:00:00.000+00:00",
+      "nguoiTao": "Not-admin",
+      "maKenhTruyen": "KTV"
+    },
+    {
+      "id": 3,
+      "maHopDong": "123",
+      "tenPhuLuc": "PL1",
+      "ngayKy": "2022-03-30T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-03-31T17:00:00.000+00:00",
+      "ngayTao": "2022-04-11T17:00:00.000+00:00",
+      "nguoiTao": "ADMIN",
+      "maKenhTruyen": "sa"
+    },
+    {
+      "id": 4,
+      "maHopDong": "111",
+      "tenPhuLuc": "PLQQ",
+      "ngayKy": "2022-04-12T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-16T17:00:00.000+00:00",
+      "ngayTao": "2022-04-11T17:00:00.000+00:00",
+      "nguoiTao": "ADMIN",
+      "maKenhTruyen": "vvvvv"
+    },
+    {
+      "id": 5,
+      "maHopDong": "5555",
+      "tenPhuLuc": "PL",
+      "ngayKy": "2022-04-05T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-19T17:00:00.000+00:00",
+      "ngayTao": "2022-04-11T17:00:00.000+00:00",
+      "nguoiTao": "USER",
+      "maKenhTruyen": "kk"
+    },
+    {
+      "id": 6,
+      "maHopDong": "999",
+      "tenPhuLuc": "PL11",
+      "ngayKy": "2022-04-04T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-13T17:00:00.000+00:00",
+      "ngayTao": "2022-04-07T17:00:00.000+00:00",
+      "nguoiTao": "VienBX",
+      "maKenhTruyen": "s"
+    },
+    {
+      "id": 7,
+      "maHopDong": "122",
+      "tenPhuLuc": "PL11",
+      "ngayKy": "2022-04-03T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-26T17:00:00.000+00:00",
+      "ngayTao": "2022-04-07T17:00:00.000+00:00",
+      "nguoiTao": "VienBX",
+      "maKenhTruyen": "yyyyyyyyy"
+    },
+    {
+      "id": 8,
+      "maHopDong": "1",
+      "tenPhuLuc": "PL",
+      "ngayKy": "2022-04-08T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-19T17:00:00.000+00:00",
+      "ngayTao": "2022-04-11T17:00:00.000+00:00",
+      "nguoiTao": "ADMIN",
+      "maKenhTruyen": "kkkkk"
+    },
+    {
+      "id": 9,
+      "maHopDong": "1223",
+      "tenPhuLuc": "vienPL",
+      "ngayKy": "2022-02-28T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-06-10T17:00:00.000+00:00",
+      "ngayTao": "2022-04-11T17:00:00.000+00:00",
+      "nguoiTao": "VienBX",
+      "maKenhTruyen": "KT1"
+    },
+    {
+      "id": 10,
+      "maHopDong": "32",
+      "tenPhuLuc": "PL",
+      "ngayKy": "2022-03-29T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-11T17:00:00.000+00:00",
+      "ngayTao": "2022-04-11T17:00:00.000+00:00",
+      "nguoiTao": "USER",
+      "maKenhTruyen": "h"
+    },
+    {
+      "id": 11,
+      "maHopDong": "vien3",
+      "tenPhuLuc": "vienPL",
+      "ngayKy": "2022-02-28T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-06-10T17:00:00.000+00:00",
+      "ngayTao": "2022-04-07T17:00:00.000+00:00",
+      "nguoiTao": "VienBX",
+      "maKenhTruyen": "KTs"
+    },
+    {
+      "id": 12,
+      "maHopDong": "vien4",
+      "tenPhuLuc": "vienPL",
+      "ngayKy": "2022-02-28T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-06-10T17:00:00.000+00:00",
+      "ngayTao": "2022-04-05T17:00:00.000+00:00",
+      "nguoiTao": "VienBX",
+      "maKenhTruyen": "KT1"
+    },
+    {
+      "id": 13,
+      "maHopDong": "123",
+      "tenPhuLuc": "PL",
+      "ngayKy": "2022-03-29T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-18T17:00:00.000+00:00",
+      "ngayTao": "2022-04-11T17:00:00.000+00:00",
+      "nguoiTao": "USER",
+      "maKenhTruyen": "ttt"
+    },
+    {
+      "id": 14,
+      "maHopDong": "vien6",
+      "tenPhuLuc": "vienPL",
+      "ngayKy": "2022-02-28T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-06-10T17:00:00.000+00:00",
+      "ngayTao": "2022-04-05T17:00:00.000+00:00",
+      "nguoiTao": "VienBX",
+      "maKenhTruyen": "KT1"
+    },
+    {
+      "id": 15,
+      "maHopDong": "888",
+      "tenPhuLuc": "PLQQ",
+      "ngayKy": "2022-03-31T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-03-28T17:00:00.000+00:00",
+      "ngayTao": "2022-04-11T17:00:00.000+00:00",
+      "nguoiTao": "ADMIN",
+      "maKenhTruyen": "KTss"
+    },
+    {
+      "id": 16,
+      "maHopDong": "55",
+      "tenPhuLuc": "PL",
+      "ngayKy": "2022-03-31T17:00:00.000+00:00",
+      "ngayNghiemThu": "2022-04-20T17:00:00.000+00:00",
+      "ngayTao": "2022-04-11T17:00:00.000+00:00",
+      "nguoiTao": "USER",
+      "maKenhTruyen": "yhh"
+    },
+    {
+      "id": 19,
+      "maHopDong": "HDTT",
+      "tenPhuLuc": "Phu luc 100",
+      "ngayKy": "2021-02-11T00:00:00.000+00:00",
+      "ngayNghiemThu": "2022-02-01T00:00:00.000+00:00",
+      "ngayTao": "2021-03-05T00:00:00.000+00:00",
+      "nguoiTao": "add_min",
+      "maKenhTruyen": "uth"
+    }
+  ]
+}

@@ -1,13 +1,21 @@
 package com.ftvtraining.namdp.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+
+import com.ftvtraining.namdp.dto.ErrorResponse;
+import com.ftvtraining.namdp.dto.Violation;
 import com.ftvtraining.namdp.exceptions.DatabaseRuntimeQueryException;
 import com.ftvtraining.namdp.exceptions.RecordAlreadyExistException;
-import com.ftvtraining.namdp.payload.ResponsePayload;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
@@ -17,27 +25,55 @@ public class PhuLucAdviceController {
 
   @ExceptionHandler(Exception.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  public ResponsePayload handleAllException(Exception exception, WebRequest wr) {
+  public ErrorResponse handleAllException(Exception exception, WebRequest wr) {
     exception.printStackTrace();
-    return new ResponsePayload(exception.getLocalizedMessage(), false, null);
+    List<Violation> vlist = new ArrayList<>();
+    vlist.add(new Violation(exception.getClass().toString(), exception.getMessage()));
+    return new ErrorResponse(false, vlist);
   }
 
   @ExceptionHandler(NoSuchElementException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
-  public ResponsePayload handleNotFoundException(NoSuchElementException e, WebRequest wr) {
-    return new ResponsePayload(e.getLocalizedMessage(), false, null);
+  public ErrorResponse handleNotFoundException(NoSuchElementException e, WebRequest wr) {
+    List<Violation> vlist = new ArrayList<>();
+    vlist.add(new Violation("NoSuchElementException", e.getMessage()));
+    return new ErrorResponse(false, vlist);
   }
 
   @ExceptionHandler(RecordAlreadyExistException.class)
   @ResponseStatus(HttpStatus.CONFLICT)
-  public ResponsePayload handleAlreadyExistException(RecordAlreadyExistException e, WebRequest wr) {
-    return new ResponsePayload(e.getMessage(), false, null);
+  public ErrorResponse handleAlreadyExistException(RecordAlreadyExistException e, WebRequest wr) {
+    List<Violation> vlist = new ArrayList<>();
+    vlist.add(new Violation("RecordAlreadyExist", e.getMessage()));
+    return new ErrorResponse(false, vlist);
   }
 
   @ExceptionHandler(DatabaseRuntimeQueryException.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  public ResponsePayload handleQueryException(DatabaseRuntimeQueryException e, WebRequest wr) {
-    return new ResponsePayload(e.getMessage() + " - " + e.getErrorCode(), false, null);
+  public ErrorResponse handleQueryException(DatabaseRuntimeQueryException e, WebRequest wr) {
+    List<Violation> vlist = new ArrayList<>();
+    vlist.add(new Violation(e.getErrorCode(), e.getMessage()));
+    return new ErrorResponse(false, vlist);
+
   }
 
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ErrorResponse handleValidationException(MethodArgumentNotValidException e, WebRequest wr) {
+    List<Violation> vList = new ArrayList<>();
+    for (FieldError error : e.getFieldErrors()) {
+      vList.add(new Violation(error.getField(), error.getDefaultMessage()));
+    }
+    return new ErrorResponse(false, vList);
+  }
+
+  @ExceptionHandler(ConstraintViolationException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ErrorResponse handleConstraintViolationException(ConstraintViolationException e, WebRequest wr) {
+    List<Violation> vList = new ArrayList<>();
+    for (ConstraintViolation<?> violation : e.getConstraintViolations()) {
+      vList.add(new Violation(violation.getPropertyPath().toString(), violation.getMessage()));
+    }
+    return new ErrorResponse(false, vList);
+  }
 }

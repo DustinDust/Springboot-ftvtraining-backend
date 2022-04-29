@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
+import com.ftvtraining.namdp.dto.GetRecordsResponse;
+import com.ftvtraining.namdp.dto.RecordsRequestPayload;
+import com.ftvtraining.namdp.dto.ResponsePayload;
 import com.ftvtraining.namdp.models.PhuLuc;
-import com.ftvtraining.namdp.payload.GetRecordsResponse;
-import com.ftvtraining.namdp.payload.RecordsRequestPayload;
-import com.ftvtraining.namdp.payload.ResponsePayload;
 import com.ftvtraining.namdp.services.PhuLucService;
 
 @RestController
@@ -31,14 +33,14 @@ public class PhuLucController {
   PhuLucService pLucService;
 
   @PostMapping
-  public ResponseEntity<GetRecordsResponse> getAllPhuluc(@RequestBody RecordsRequestPayload payload) {
+  public ResponseEntity<GetRecordsResponse> getAllPhuluc(@Valid @RequestBody RecordsRequestPayload payload) {
     Pageable pageable = PageRequest.of(payload.getPageIndex(), payload.getPageSize());
     Page<PhuLuc> res = this.pLucService.getAllPL(payload, pageable);
-    return ResponseEntity.ok().body(new GetRecordsResponse(res.getTotalElements(), res.getContent()));
+    return ResponseEntity.ok().body(new GetRecordsResponse(true, res.getTotalElements(), res.getContent()));
   }
 
   @PostMapping("/native")
-  public ResponseEntity<GetRecordsResponse> getPhuLucNatvie(@RequestBody RecordsRequestPayload payload) {
+  public ResponseEntity<GetRecordsResponse> getPhuLucNatvie(@Valid @RequestBody RecordsRequestPayload payload) {
     GetRecordsResponse res = this.pLucService.getPLProc(payload);
     return ResponseEntity.ok().body(res);
 

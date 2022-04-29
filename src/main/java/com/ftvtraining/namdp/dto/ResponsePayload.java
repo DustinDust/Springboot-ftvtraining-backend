@@ -1,4 +1,4 @@
-package com.ftvtraining.namdp.payload;
+package com.ftvtraining.namdp.dto;
 
 import java.io.Serializable;
 

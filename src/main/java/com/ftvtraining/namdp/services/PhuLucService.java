@@ -16,12 +16,12 @@ import javax.persistence.criteria.Root;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ftvtraining.namdp.dto.GetRecordsResponse;
+import com.ftvtraining.namdp.dto.RecordsRequestPayload;
 import com.ftvtraining.namdp.exceptions.DatabaseRuntimeQueryException;
 import com.ftvtraining.namdp.exceptions.RecordAlreadyExistException;
 import com.ftvtraining.namdp.models.PhuLuc;
 import com.ftvtraining.namdp.models.PhuLuc_;
-import com.ftvtraining.namdp.payload.GetRecordsResponse;
-import com.ftvtraining.namdp.payload.RecordsRequestPayload;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -98,7 +98,8 @@ public class PhuLucService {
       if (!res.containsKey("PO_ERR_CODE") || !(res.get("PO_ERR_CODE").toString().equals("0"))) {
         throw new DatabaseRuntimeQueryException((String) res.get("PO_MESSAGE"), res.get("PO_ERR_CODE").toString());
       } else {
-        return new GetRecordsResponse(Long.valueOf(res.get("PO_LENGTH").toString()), (List<PhuLuc>) res.get("PO_DATA"));
+        return new GetRecordsResponse(true, Long.valueOf(res.get("PO_LENGTH").toString()),
+            (List<PhuLuc>) (res.get("PO_DATA")));
       }
     } catch (JsonProcessingException e) {
       throw new RuntimeException("Error processing json");
